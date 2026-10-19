@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -33,3 +35,10 @@ jobs:
         with:
           name: PagePilot-debug-apk
           path: PagePilot/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish APK to Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0
+          name: PagePilot v1.0
+          files: PagePilot/app/build/outputs/apk/debug/app-debug.apk
